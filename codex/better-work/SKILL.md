@@ -1,6 +1,6 @@
 ---
-name: high-agency
-description: "Professional high-agency execution protocol for AI coding agents. Use when: (1) the task has failed 2+ times or the agent is looping on the same approach; (2) the agent is about to say 'I can't', suggest manual work too early, or blame environment/tooling without verification; (3) the agent is being passive by not searching, not reading source, not verifying, or waiting for the user to drive; (4) the user signals frustration like 'try again', 'dig deeper', 'verify it', or similar. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis. Do NOT trigger on first-attempt failures or while a clearly different fix is already in progress."
+name: better-work
+description: "Better Work is a professional execution protocol for AI coding agents. Use when: (1) the task has failed 2+ times or the agent is looping on the same approach; (2) the agent is about to say 'I can't', suggest manual work too early, or blame environment/tooling without verification; (3) the agent is being passive by not searching, not reading source, not verifying, or waiting for the user to drive; (4) the user signals frustration like 'try again', 'dig deeper', 'verify it', or similar. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis. Do NOT trigger on first-attempt failures or while a clearly different fix is already in progress."
 license: MIT
 ---
 

@@ -1,10 +1,10 @@
-# high-agency-skill
+# better-work-skill
 
 ### 一个面向 Coding Agent 的“验证优先”执行协议
 
 **[🇺🇸 English](README.md)** | **🇨🇳 中文**
 
-`high-agency-skill` 不是给模型增加新知识，也不是给 agent 增加新工具。它做的是另一件事：重塑 agent 使用现有能力的方式。
+`better-work-skill` 不是给模型增加新知识，也不是给 agent 增加新工具。它做的是另一件事：重塑 agent 使用现有能力的方式。
 
 它会把 agent 推向这些行为：
 
@@ -16,7 +16,7 @@
 - 更多验证后再交付
 - 真卡住时给出更高信息量的交接
 
-这个仓库是从原始 `pua` 实验演化出来的专业英文版，更适合北美和英文工程团队使用。
+这个仓库对外采用 **Better Work** 作为命令层，对内仍然基于 **High-Agency Delivery Protocol** 这套执行方法论，更适合北美和英文工程团队使用。
 
 ## 它解决的是什么问题
 
@@ -28,7 +28,7 @@
 - 改了一点就急着宣布完成
 - 本来能自己查的信息，先去问用户
 
-`high-agency` 的作用，就是把这些低成本、低质量路径变得“不再默认成立”。
+`better-work` 的作用，就是把这些低成本、低质量路径变得“不再默认成立”。
 
 ## 核心原则
 
@@ -62,48 +62,48 @@ flowchart LR
 ### Claude Code
 
 ```bash
-mkdir -p ~/.claude/skills/high-agency
-curl -o ~/.claude/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/skills/high-agency/SKILL.md
+mkdir -p ~/.claude/skills/better-work
+curl -o ~/.claude/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/skills/better-work/SKILL.md
 ```
 
 然后在 Claude Code 里加载：
 
 ```text
-$high-agency
+$better-work
 ```
 
 ### Codex CLI
 
 ```bash
-mkdir -p ~/.codex/skills/high-agency
-curl -o ~/.codex/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/codex/high-agency/SKILL.md
+mkdir -p ~/.codex/skills/better-work
+curl -o ~/.codex/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/codex/better-work/SKILL.md
 
 mkdir -p ~/.codex/prompts
-curl -o ~/.codex/prompts/high-agency.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/commands/high-agency.md
+curl -o ~/.codex/prompts/better-work.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/commands/better-work.md
 ```
 
 然后在对话里输入：
 
 ```text
-$high-agency
+$better-work
 ```
 
 ### Cursor
 
 ```bash
 mkdir -p .cursor/rules
-curl -o .cursor/rules/high-agency.mdc \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/cursor/rules/high-agency.mdc
+curl -o .cursor/rules/better-work.mdc \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/cursor/rules/better-work.mdc
 ```
 
 ### VS Code Copilot
 
 ```bash
 mkdir -p .github/instructions
-cp vscode/instructions/high-agency.instructions.md .github/instructions/
+cp vscode/instructions/better-work.instructions.md .github/instructions/
 ```
 
 ## Before / After：Agent 行为会怎么变
@@ -116,6 +116,64 @@ cp vscode/instructions/high-agency.instructions.md .github/instructions/
 | 改完代码 | 直接说“好了” | 跑最小相关验证后再说完成 |
 | 修好一个 bug | 停在表面问题 | 顺手检查同类模式和相邻问题 |
 | 真正卡住 | 给一句模糊失败 | 输出结构化、高信息量交接 |
+
+## 命令体系
+
+文档里统一使用 `/better-work` 作为命令写法。不同工具里，它可能映射成：
+
+- `$better-work`
+- `/prompts:better-work`
+- 平台自己的 slash command
+
+### `/better-work`
+
+适合你想开启完整协议的时候。
+
+示例：
+
+- `/better-work 把这个 failing CI test 从定位到验证完整做完。`
+- `/better-work 调查为什么 staging 正常但 production 失败。`
+- `/better-work 实现这个 API 改动并验证结果。`
+
+### `/better-work verify`
+
+适合“看起来差不多做完了，但我要更强验证”的场景。
+
+示例：
+
+- `/better-work verify 我觉得 auth fix 已经好了，再帮我严格验一遍。`
+- `/better-work verify 这个配置改动在合并前做一次闭环检查。`
+- `/better-work verify 跑最小端到端路径，确认这个 bugfix 真修好了。`
+
+### `/better-work unstick`
+
+适合 agent 已经开始打转、猜测、或者没有新信息产出的场景。
+
+示例：
+
+- `/better-work unstick 我们已经试了两个修法，还是 ECONNREFUSED。`
+- `/better-work unstick 这个 migration 一直以同样方式失败。`
+- `/better-work unstick 别再微调了，换一个本质不同的方向。`
+
+### `/better-work handoff`
+
+适合任务真的卡住了，需要输出高信息量交接的时候。
+
+示例：
+
+- `/better-work handoff 如果还是无法本地复现，就写一份干净的边界报告。`
+- `/better-work handoff 总结 verified facts 和 eliminated possibilities。`
+- `/better-work handoff 给下一个接手的人准备完整上下文。`
+
+### `/better-work review`
+
+适合表面问题修完后，继续做扩展检查的时候。
+
+示例：
+
+- `/better-work review 修完后检查这个模块里有没有 sibling issues。`
+- `/better-work review 看一下上下游影响，再决定能不能算 done。`
+- `/better-work review 扫一下边界情况和附近文件里的相同模式。`
 
 ## 为什么它有效
 
@@ -340,35 +398,35 @@ skill 里的 `Recovery Method` 本质上就是一个标准化 debug pipeline：
 
 The main skill lives here:
 
-- `codex/high-agency/SKILL.md`
-- `skills/high-agency/SKILL.md`，可用于 Claude Code 和其他支持 SKILL.md 的工具
+- `codex/better-work/SKILL.md`
+- `skills/better-work/SKILL.md`，可用于 Claude Code 和其他支持 SKILL.md 的工具
 
 Equivalent files are also included for:
 
-- `codebuddy/high-agency/SKILL.md`
-- `cursor/rules/high-agency.mdc`
-- `kiro/steering/high-agency.md`
-- `vscode/instructions/high-agency.instructions.md`
-- `vscode/prompts/high-agency.prompt.md`
-- `vscode/copilot-instructions-high-agency.md`
-- `commands/high-agency.md`
+- `codebuddy/better-work/SKILL.md`
+- `cursor/rules/better-work.mdc`
+- `kiro/steering/better-work.md`
+- `vscode/instructions/better-work.instructions.md`
+- `vscode/prompts/better-work.prompt.md`
+- `vscode/copilot-instructions-better-work.md`
+- `commands/better-work.md`
 
 ## 安装
 
 ### Claude Code
 
 ```bash
-mkdir -p ~/.claude/skills/high-agency
-curl -o ~/.claude/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/skills/high-agency/SKILL.md
+mkdir -p ~/.claude/skills/better-work
+curl -o ~/.claude/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/skills/better-work/SKILL.md
 ```
 
 项目级安装：
 
 ```bash
-mkdir -p .claude/skills/high-agency
-curl -o .claude/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/skills/high-agency/SKILL.md
+mkdir -p .claude/skills/better-work
+curl -o .claude/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/skills/better-work/SKILL.md
 ```
 
 ### OpenAI Codex CLI
@@ -376,27 +434,27 @@ curl -o .claude/skills/high-agency/SKILL.md \
 推荐：
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/d-wwei/better-work-skill/main/.codex/INSTALL.md
 ```
 
 手动安装：
 
 ```bash
-mkdir -p ~/.codex/skills/high-agency
-curl -o ~/.codex/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/codex/high-agency/SKILL.md
+mkdir -p ~/.codex/skills/better-work
+curl -o ~/.codex/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/codex/better-work/SKILL.md
 
 mkdir -p ~/.codex/prompts
-curl -o ~/.codex/prompts/high-agency.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/commands/high-agency.md
+curl -o ~/.codex/prompts/better-work.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/commands/better-work.md
 ```
 
 ### Cursor
 
 ```bash
 mkdir -p .cursor/rules
-curl -o .cursor/rules/high-agency.mdc \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/cursor/rules/high-agency.mdc
+curl -o .cursor/rules/better-work.mdc \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/cursor/rules/better-work.mdc
 ```
 
 ### Kiro
@@ -405,16 +463,16 @@ Steering file：
 
 ```bash
 mkdir -p .kiro/steering
-curl -o .kiro/steering/high-agency.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/kiro/steering/high-agency.md
+curl -o .kiro/steering/better-work.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/kiro/steering/better-work.md
 ```
 
 Agent skill：
 
 ```bash
-mkdir -p .kiro/skills/high-agency
-curl -o .kiro/skills/high-agency/SKILL.md \
-  https://raw.githubusercontent.com/d-wwei/high-agency-skill/main/skills/high-agency/SKILL.md
+mkdir -p .kiro/skills/better-work
+curl -o .kiro/skills/better-work/SKILL.md \
+  https://raw.githubusercontent.com/d-wwei/better-work-skill/main/skills/better-work/SKILL.md
 ```
 
 ### VS Code Copilot
@@ -423,21 +481,21 @@ Global instructions：
 
 ```bash
 mkdir -p .github
-cp vscode/copilot-instructions-high-agency.md .github/copilot-instructions.md
+cp vscode/copilot-instructions-better-work.md .github/copilot-instructions.md
 ```
 
 Path-level instructions：
 
 ```bash
 mkdir -p .github/instructions
-cp vscode/instructions/high-agency.instructions.md .github/instructions/
+cp vscode/instructions/better-work.instructions.md .github/instructions/
 ```
 
 Manual prompt：
 
 ```bash
 mkdir -p .github/prompts
-cp vscode/prompts/high-agency.prompt.md .github/prompts/
+cp vscode/prompts/better-work.prompt.md .github/prompts/
 ```
 
 ### 通用 SKILL.md 消费方
@@ -445,7 +503,7 @@ cp vscode/prompts/high-agency.prompt.md .github/prompts/
 支持通用 Agent Skills 格式的工具，可以直接使用：
 
 ```text
-skills/high-agency/SKILL.md
+skills/better-work/SKILL.md
 ```
 
 ## 适合什么场景

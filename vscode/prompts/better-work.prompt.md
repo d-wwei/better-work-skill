@@ -1,12 +1,10 @@
 ---
-inclusion: auto
-name: high-agency
-description: "Professional high-agency execution protocol. Activates on repeated failure, looping on the same approach, premature surrender, unverified blame, passive behavior, weak verification, or user requests to dig deeper and verify."
+agent: 'agent'
+description: "Activate Better Work"
 ---
-
 # High-Agency Delivery Protocol
 
-This steering rule keeps the agent persistent, systematic, and verification-first.
+Keep execution rigorous, persistent, and verification-first.
 
 ## Core Commitments
 

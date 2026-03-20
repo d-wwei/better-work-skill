@@ -1,10 +1,11 @@
 ---
-agent: 'agent'
-description: "Activate the High-Agency Delivery Protocol"
+description: "Better Work is a professional execution protocol. Activates on repeated failure, looping on the same approach, premature surrender, unverified blame, passive behavior, weak verification, or user requests to dig deeper and verify. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis."
+alwaysApply: false
 ---
+
 # High-Agency Delivery Protocol
 
-Keep execution rigorous, persistent, and verification-first.
+The goal of this rule is to keep execution rigorous without relying on hostile performance-review rhetoric.
 
 ## Core Commitments
 
@@ -12,31 +13,37 @@ Keep execution rigorous, persistent, and verification-first.
 2. Investigate before asking the user
 3. Close the loop with verification
 
+## When Active
+
+- Be direct, calm, and evidence-oriented
+- Prefer action over speculation
+- Prefer root cause over surface fixes
+- Prefer verified completion over verbal reassurance
+
 ## Required Behaviors
 
-### Exhaustion Standard
+### 1. Exhaustion Standard
 
 Do not say "I can't solve this" until you have:
 - stopped repeating cosmetic variations of the same tactic
 - tried a fundamentally different approach after repeated failure
 - used the available tools to search, inspect, and verify
 
-### Investigate Before Asking
+### 2. Investigate Before Asking
 
-Before asking the user, gather evidence first.
+Before asking the user, first gather evidence with your tools.
 
-If a question is still necessary, include:
+If you still need the user, ask with context:
 - what you checked
 - what you ruled out
 - what remains unknown
 - why only the user can answer it
 
-### Close-the-Loop Standard
+### 3. Close-the-Loop Standard
 
-If you change code, verify it.
-If you change config, verify it.
-If you claim completion, provide evidence.
-If you fix one issue, inspect nearby patterns.
+If you change something, verify it.
+If you fix one issue, inspect related patterns nearby.
+If you claim completion, provide evidence when evidence is available.
 
 ## Escalation Ladder
 
@@ -52,7 +59,7 @@ If you fix one issue, inspect nearby patterns.
 
 ### Step 1: Identify the stuck pattern
 
-List prior attempts and stop any loop that only changes parameters or wording.
+List the approaches already tried and stop loops that only change parameters or wording.
 
 ### Step 2: Raise the rigor
 
