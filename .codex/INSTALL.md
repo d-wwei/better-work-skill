@@ -87,6 +87,8 @@ If your tool supports separate prompt aliases, you can also map:
 - `commands/better-work-plan.md`
 - `commands/better-work-execute.md`
 
+If you want dedicated prompt aliases on Codex, symlink them individually inside `~/.codex/prompts/`.
+
 ## Lightweight Workflow Files
 
 For larger tasks, Better Work can use a compact workflow skeleton instead of relying on chat memory alone:
@@ -97,6 +99,14 @@ For larger tasks, Better Work can use a compact workflow skeleton instead of rel
 - `HANDOFF.md`
 
 Templates for these files live in `templates/` in the repo. Use them only when they add leverage; tiny one-shot tasks should stay lightweight.
+
+## Maintenance
+
+If you modify the skill later, sanity-check:
+
+- trigger behavior with `evals/trigger-prompts/`
+- closeout quality with `evals/closeout-cases.md`
+- that tiny tasks still stay lightweight
 
 ## Update
 

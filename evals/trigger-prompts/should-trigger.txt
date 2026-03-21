@@ -1,0 +1,6 @@
+try again and verify it end to end
+we already tried two fixes and it still fails
+make a plan before you keep changing files
+resume this task across sessions without losing context
+stop guessing and investigate the actual error
+write a clean handoff if this stays blocked

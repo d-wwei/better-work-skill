@@ -51,6 +51,17 @@ Better Work 现在采用四阶段模型：
 
 这些文件都应该保持简短，只服务执行，不写成长文档。
 
+## 什么时候该用状态文件
+
+以下场景建议启用这些模板：
+
+- 任务涉及多个文件或多个系统
+- 任务大概率会跨会话继续
+- 任务已经开始循环或丢上下文
+- 任务很可能需要交接
+
+如果任务足够小，能马上完成并验证，就不要强行写文件。
+
 ## 命令
 
 - `/better-work`
@@ -69,6 +80,15 @@ Better Work 现在采用四阶段模型：
 - `review`：检查同类问题、边界和上下游影响
 - `plan`：澄清任务并拆解步骤
 - `execute`：从现有计划或状态继续推进
+
+## 轻量模板
+
+这些模板故意保持很短，方便真实使用：
+
+- [TASK.md](templates/TASK.md)
+- [PLAN.md](templates/PLAN.md)
+- [STATE.md](templates/STATE.md)
+- [HANDOFF.md](templates/HANDOFF.md)
 
 ## 快速开始
 
@@ -112,3 +132,9 @@ $better-work
 - 小任务和长任务的分流策略
 
 结果是：依然轻，但更不容易在真实工程任务里散架。
+
+## 仓库补充说明
+
+- `.gitignore` 已忽略 `.DS_Store` 这类本地噪音文件
+- `evals/trigger-prompts/` 提供最小触发样例
+- `evals/closeout-cases.md` 用来约束后续版本的收尾行为

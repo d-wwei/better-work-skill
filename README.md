@@ -58,6 +58,17 @@ For larger tasks, use the templates in `templates/`:
 
 These files are intentionally small. They are execution aids, not long project docs.
 
+## When To Use Workflow Files
+
+Use the workflow templates when the task:
+
+- spans multiple files or systems
+- is likely to continue across sessions
+- has already started looping or drifting
+- may need a clean handoff
+
+Skip them when the task is small enough to complete and verify immediately.
+
 ## Commands
 
 Use `/better-work` as the normalized command language in docs and examples. Depending on the tool, that may map to:
@@ -93,6 +104,15 @@ Bias toward intake, success criteria, task slicing, and whether workflow files a
 ### `/better-work execute`
 
 Bias toward continuing from the current task, plan, or state without losing context.
+
+## Lightweight Templates
+
+The templates are intentionally short so they can survive real usage:
+
+- [TASK.md](templates/TASK.md)
+- [PLAN.md](templates/PLAN.md)
+- [STATE.md](templates/STATE.md)
+- [HANDOFF.md](templates/HANDOFF.md)
 
 ## 3-Minute Quick Start
 
@@ -165,3 +185,9 @@ This version keeps the original rigor while adding:
 - clearer separation between small-task and large-task behavior
 
 The result is still lightweight, but less likely to lose context on real engineering work.
+
+## Repository Notes
+
+- `.gitignore` excludes common local noise like `.DS_Store`
+- `evals/trigger-prompts/` contains minimal trigger sanity checks
+- `evals/closeout-cases.md` captures expected end-state behavior for future iterations
