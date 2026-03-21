@@ -12,6 +12,10 @@ Better Work combines three ideas:
 2. A clean command surface for teams
 3. A lightweight workflow skeleton for multi-step work
 
+For complex tasks it can also activate a conditional protocol module:
+
+4. `round-based-execution` for multi-round PDCA work with quality gates
+
 The goal is simple:
 
 1. Prevent premature surrender
@@ -61,6 +65,8 @@ Small tasks should stay light.
 Multi-step tasks should not rely on memory alone.
 
 When the work spans multiple files, systems, or sessions, move from implicit memory to lightweight written state.
+
+For tasks that are materially complex, long-running, high-risk, or multi-agent, activate `subskills/round-based-execution.md` instead of trying to push one linear stream to completion.
 
 ## Execution Posture
 
@@ -114,6 +120,11 @@ Use these templates from `templates/` when structure is needed:
 - `PLAN.md` -> current phase, task slices, verification steps, risks
 - `STATE.md` -> latest progress, evidence, blockers, next action
 - `HANDOFF.md` -> verified facts, eliminated possibilities, boundary, next directions
+
+When `round-based-execution` is active, also use:
+
+- `ROUND.md` -> per-round PDCA state, evidence, gate result, next round
+- `round-state.json` -> machine-friendly round handoff/state persistence
 
 Keep them short. They are execution aids, not long-form product docs.
 
@@ -169,6 +180,7 @@ Do not end with a vague status report.
 The Better Work command surface supports these modes:
 
 - `better-work` -> full protocol
+- `better-work rounds` -> explicit round-based execution mode for complex work
 - `better-work verify` -> verification and evidence bias
 - `better-work unstick` -> recovery and path-switching bias
 - `better-work handoff` -> structured blocker report
@@ -177,6 +189,8 @@ The Better Work command surface supports these modes:
 - `better-work execute` -> continue from current plan/state
 
 When the surrounding tool supports commands, use the mode that best matches the task. Otherwise apply the same bias implicitly.
+
+If the user explicitly invokes `better-work rounds`, activate `round-based-execution` even if auto-activation would otherwise remain optional.
 
 ## Initiative Levels
 
@@ -216,6 +230,44 @@ Repeated failure increases the rigor requirement.
 | 5th+ | L4 Isolation Mode | The task needs boundary reduction | Build a minimal reproduction, isolate variables, consider alternate tooling, produce a formal boundary report |
 
 If a task is structurally complex before the second failure, you may enter `plan` mode early instead of waiting for escalation.
+
+If a task is structurally complex before the second failure, you may also activate `round-based-execution` early instead of waiting for repeated failure.
+
+## Conditional Protocol Modules
+
+Better Work supports conditional execution overlays instead of one always-on heavy protocol.
+
+### `round-based-execution`
+
+Use when:
+
+- the task needs multiple bounded stages
+- the task spans multiple files, systems, or agents
+- exploration must happen before safe execution
+- the task may cross sessions
+- quality would suffer if verification waits until the end
+
+Do not use when:
+
+- the task is a tiny one-shot action
+- the task can be completed and verified in one bounded pass
+
+When active:
+
+- work proceeds round by round
+- every round must pass PDCA
+- every round must end with a quality gate
+- no gate approval means no automatic next round
+- main-thread reporting should stay compressed
+
+References:
+
+- `activation-policy.md`
+- `subskills/round-based-execution.md`
+- `subskills/agents/round-worker.md`
+- `subskills/agents/round-challenger.md`
+- `templates/ROUND.md`
+- `templates/round-state.json`
 
 ## Recovery Method
 

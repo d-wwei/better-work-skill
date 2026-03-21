@@ -1,0 +1,65 @@
+{
+  "task_id": "",
+  "task_name": "",
+  "objective": "",
+  "round_number": 0,
+  "round_type": "",
+  "round_goal": "",
+  "primary_objective": "",
+  "in_scope": [],
+  "out_of_scope": [],
+  "deferred_items": [],
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "",
+      "status": "unverified",
+      "impact_if_wrong": "",
+      "owner_round": ""
+    }
+  ],
+  "dependencies": {
+    "items": [],
+    "dependency_gate_result": ""
+  },
+  "explored_inputs": [],
+  "exploration_summary": [],
+  "distilled_findings": {
+    "confirmed": [],
+    "likely": [],
+    "unverified": [],
+    "unknown": [],
+    "needs_external_confirmation": []
+  },
+  "current_plan": [],
+  "actions_taken": [],
+  "evidence": [
+    {
+      "claim": "",
+      "evidence": "",
+      "evidence_grade": "E0",
+      "source": ""
+    }
+  ],
+  "verification": {
+    "verification_result": "",
+    "definition_of_done_result": "",
+    "exit_criteria_result": "",
+    "depth_consistency_check": "",
+    "challenger_findings": []
+  },
+  "quality_gate": "PASS",
+  "blockers": [],
+  "risks": [],
+  "carry_forward": {
+    "safe_to_carry_forward": [],
+    "must_resolve_before_next_round": [],
+    "requires_escalation": [],
+    "invalidates_current_plan": []
+  },
+  "remaining_work": [],
+  "next_round_type": "",
+  "recommended_next_action": "",
+  "final_action_decision": "Continue",
+  "status": ""
+}

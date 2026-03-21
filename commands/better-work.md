@@ -1,6 +1,6 @@
 ---
-description: "Better Work command surface. Use /better-work for the core protocol, or add verify, unstick, handoff, review, plan, or execute."
-argument-hint: "[verify|unstick|handoff|review|plan|execute] [task description]"
+description: "Better Work command surface. Use /better-work for the core protocol, or add rounds, verify, unstick, handoff, review, plan, or execute."
+argument-hint: "[rounds|verify|unstick|handoff|review|plan|execute] [task description]"
 ---
 
 Load the `better-work` core skill and apply it to the current task.
@@ -8,6 +8,7 @@ Load the `better-work` core skill and apply it to the current task.
 ## Command Routing
 
 - no subcommand -> activate the full Better Work protocol
+- `rounds` -> explicitly activate `round-based-execution` for complex multi-round work
 - `verify` -> focus on verification, evidence, and close-the-loop checks
 - `unstick` -> focus on recovery method, alternate hypotheses, and changing direction
 - `handoff` -> produce a structured boundary report with verified facts and next steps
@@ -21,6 +22,7 @@ Load the `better-work` core skill and apply it to the current task.
 2. Follow the behavior protocol in `SKILL.md`
 3. If `$ARGUMENTS` contains text beyond the subcommand, treat it as the task description
 4. Use the subcommand to bias the output:
+   - `rounds`: prioritize activation of `round-based-execution`, explicit round selection, PDCA, quality gates, and structured round handoff
    - `verify`: prioritize evidence, tests, build output, runtime checks, and completion criteria
    - `unstick`: prioritize diagnosis, search, assumption checks, and a new approach
    - `handoff`: prioritize verified facts, eliminated possibilities, and problem boundaries
@@ -39,6 +41,11 @@ If the task is multi-step, likely to span sessions, or already showing context d
 - `STATE.md`
 - `HANDOFF.md`
 
+If `rounds` mode is active, also use:
+
+- `ROUND.md`
+- `round-state.json`
+
 Keep them short and execution-focused.
 
 ## Example Invocations
@@ -54,6 +61,12 @@ Keep them short and execution-focused.
 - `/better-work verify I think the auth fix is done.`
 - `/better-work verify this config change before we merge it.`
 - `/better-work verify the smallest end-to-end path for this bugfix.`
+
+### `/better-work rounds`
+
+- `/better-work rounds Fix this multi-service production bug with bounded rounds.`
+- `/better-work rounds Research this unfamiliar codebase and leave resumable round state.`
+- `/better-work rounds Implement this feature in verifiable slices with quality gates.`
 
 ### `/better-work unstick`
 

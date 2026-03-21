@@ -20,6 +20,7 @@ This repo packages three layers into one practical system:
 - `high-agency` as the behavior core
 - `better-work` as the product and command surface
 - a lightweight GSD-inspired workflow skeleton for longer tasks
+- `round-based-execution` as a conditional complex-task protocol module
 
 ## What Changed
 
@@ -28,6 +29,8 @@ Better Work now has three responsibilities:
 1. enforce rigorous execution standards
 2. give users a clean command surface
 3. keep multi-step work from losing context
+
+For complex tasks, it can also switch into a stricter round-by-round execution mode.
 
 In practice, that means:
 
@@ -56,6 +59,11 @@ For larger tasks, use the templates in `templates/`:
 - `STATE.md`
 - `HANDOFF.md`
 
+For complex tasks, activate the round protocol and also use:
+
+- `ROUND.md`
+- `round-state.json`
+
 These files are intentionally small. They are execution aids, not long project docs.
 
 ## When To Use Workflow Files
@@ -69,6 +77,34 @@ Use the workflow templates when the task:
 
 Skip them when the task is small enough to complete and verify immediately.
 
+## Complex Task Enhancement
+
+`round-based-execution` is a subskill of `better-work`, not a standalone peer skill.
+
+Use it when:
+
+- the task needs multiple stages
+- the task spans multiple files, systems, or agents
+- the task contains meaningful unknowns
+- the task may cross sessions
+- verification must happen round by round instead of only at the end
+
+Its role is to convert complex work into bounded rounds with:
+
+- explicit round type selection
+- PDCA per round
+- quality gates per round
+- assumption and evidence tracking
+- structured handoff state
+- safer multi-agent coordination
+
+See:
+
+- [activation-policy.md](activation-policy.md)
+- [subskills/round-based-execution.md](subskills/round-based-execution.md)
+- [templates/ROUND.md](templates/ROUND.md)
+- [templates/round-state.json](templates/round-state.json)
+
 ## Commands
 
 Use `/better-work` as the normalized command language in docs and examples. Depending on the tool, that may map to:
@@ -80,6 +116,10 @@ Use `/better-work` as the normalized command language in docs and examples. Depe
 ### `/better-work`
 
 Use this when you want the full protocol.
+
+### `/better-work rounds`
+
+Use this when you want to force `round-based-execution` for a complex task instead of relying on auto-activation.
 
 ### `/better-work verify`
 
@@ -113,6 +153,12 @@ The templates are intentionally short so they can survive real usage:
 - [PLAN.md](templates/PLAN.md)
 - [STATE.md](templates/STATE.md)
 - [HANDOFF.md](templates/HANDOFF.md)
+- [ROUND.md](templates/ROUND.md)
+- [round-state.json](templates/round-state.json)
+
+Recommended explicit command for complex tasks:
+
+- `/better-work rounds`
 
 ## 3-Minute Quick Start
 
@@ -184,6 +230,8 @@ This version keeps the original rigor while adding:
 - compact state templates for work that spans sessions
 - clearer separation between small-task and large-task behavior
 
+With `round-based-execution`, Better Work can stay lightweight for small tasks while becoming stricter for long, risky, or multi-round work.
+
 The result is still lightweight, but less likely to lose context on real engineering work.
 
 ## Repository Notes
@@ -191,3 +239,4 @@ The result is still lightweight, but less likely to lose context on real enginee
 - `.gitignore` excludes common local noise like `.DS_Store`
 - `evals/trigger-prompts/` contains minimal trigger sanity checks
 - `evals/closeout-cases.md` captures expected end-state behavior for future iterations
+- `subskills/` contains conditional execution overlays such as `round-based-execution`
