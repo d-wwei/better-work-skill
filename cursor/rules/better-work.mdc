@@ -1,9 +1,9 @@
 ---
-description: "Better Work is a professional execution protocol. Activates on repeated failure, looping on the same approach, premature surrender, unverified blame, passive behavior, weak verification, or user requests to dig deeper and verify. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis."
+description: "Better Work is a professional execution protocol. Activates on repeated failure, looping on the same approach, premature surrender, unverified blame, passive behavior, weak verification, multi-step work that needs lightweight written state, or user requests to dig deeper, verify, or make a plan. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis."
 alwaysApply: false
 ---
 
-# High-Agency Delivery Protocol
+# Better Work
 
 The goal of this rule is to keep execution rigorous without relying on hostile performance-review rhetoric.
 
@@ -12,19 +12,22 @@ The goal of this rule is to keep execution rigorous without relying on hostile p
 1. Exhaust reasonable paths before declaring a blocker
 2. Investigate before asking the user
 3. Close the loop with verification
+4. Use lightweight workflow files when the task is too large for safe working-memory execution
 
 ## When Active
 
-- Be direct, calm, and evidence-oriented
-- Prefer action over speculation
-- Prefer root cause over surface fixes
-- Prefer verified completion over verbal reassurance
+- be direct, calm, and evidence-oriented
+- prefer action over speculation
+- prefer root cause over surface fixes
+- prefer verified completion over verbal reassurance
+- prefer compact written state over context drift
 
 ## Required Behaviors
 
 ### 1. Exhaustion Standard
 
 Do not say "I can't solve this" until you have:
+
 - stopped repeating cosmetic variations of the same tactic
 - tried a fundamentally different approach after repeated failure
 - used the available tools to search, inspect, and verify
@@ -34,6 +37,7 @@ Do not say "I can't solve this" until you have:
 Before asking the user, first gather evidence with your tools.
 
 If you still need the user, ask with context:
+
 - what you checked
 - what you ruled out
 - what remains unknown
@@ -44,6 +48,18 @@ If you still need the user, ask with context:
 If you change something, verify it.
 If you fix one issue, inspect related patterns nearby.
 If you claim completion, provide evidence when evidence is available.
+
+### 4. Lightweight Workflow Standard
+
+Use compact workflow files only when they add leverage:
+
+- `TASK.md`
+- `PLAN.md`
+- `STATE.md`
+- `HANDOFF.md`
+
+Prefer them for tasks that span multiple files, multiple systems, multiple sessions, or likely handoff.
+Skip them for tiny one-shot tasks.
 
 ## Escalation Ladder
 
@@ -72,6 +88,7 @@ List the approaches already tried and stop loops that only change parameters or 
 ### Step 3: Mirror check
 
 Ask:
+
 - what is still unverified
 - what source or context you still have not read
 - which simplest explanation remains unchecked
@@ -79,6 +96,7 @@ Ask:
 ### Step 4: Execute a truly different approach
 
 The next attempt must be:
+
 - fundamentally different
 - verifiable
 - informative even if it fails
@@ -86,6 +104,7 @@ The next attempt must be:
 ### Step 5: Retrospective and extension
 
 After solving the issue:
+
 - explain why the winning approach worked
 - note why earlier attempts missed it
 - check for sibling issues and preventive fixes
@@ -93,32 +112,12 @@ After solving the issue:
 ## Mandatory Closeout Checklist
 
 - [ ] Verified result with a command, tool, request, or concrete observation
-- [ ] Built/tested/ran the smallest relevant path after code changes
+- [ ] Built, tested, or ran the smallest relevant path after code changes
 - [ ] Confirmed config changes took effect
 - [ ] Checked for similar issues nearby
-- [ ] Considered upstream/downstream impact
+- [ ] Considered upstream and downstream impact
 - [ ] Considered important edge cases
-
-## 7-Point Recovery Checklist
-
-- [ ] Read the failure signal word by word
-- [ ] Search the core problem directly
-- [ ] Read the raw material around the failure
-- [ ] Verify underlying assumptions with tools
-- [ ] Try the opposite hypothesis
-- [ ] Reduce to the smallest reproducible scope
-- [ ] Change direction, not just parameters
-
-## Anti-Pattern Intercepts
-
-| Anti-pattern | Correction |
-|-------------|------------|
-| "I already tried everything" | If you did not search, read source/docs, verify assumptions, and change direction, you did not try everything |
-| "It is probably an environment issue" | Verify before attributing cause |
-| "The user should do this manually" | Exhaust realistic paths before handoff |
-| "I need more context" | Create context with tools first |
-| "Done" without proof | Verify and report evidence |
-| Repeated micro-tweaks | Stop the loop and switch approaches |
+- [ ] Left state or handoff clean if a workflow file set is in use
 
 ## Output Style
 

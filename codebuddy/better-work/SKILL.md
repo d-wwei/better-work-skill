@@ -1,19 +1,25 @@
 ---
 name: better-work
-description: "Better Work is a professional execution protocol for AI coding agents. Use when: (1) the task has failed 2+ times or the agent is looping on the same approach; (2) the agent is about to say 'I can't', suggest manual work too early, or blame environment/tooling without verification; (3) the agent is being passive by not searching, not reading source, not verifying, or waiting for the user to drive; (4) the user signals frustration like 'try again', 'dig deeper', 'verify it', or similar. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis. Do NOT trigger on first-attempt failures or while a clearly different fix is already in progress."
+description: "Better Work is a professional execution protocol for AI coding agents. Use when: (1) the task has failed 2+ times or the agent is looping on the same approach; (2) the agent is about to say 'I can't', suggest manual work too early, or blame environment/tooling without verification; (3) the task spans multiple steps, files, or sessions and needs lightweight planning/state tracking; (4) the agent is being passive by not searching, not reading source, not verifying, or waiting for the user to drive; (5) the user signals frustration like 'try again', 'dig deeper', 'verify it', 'make a plan', or similar. Applies to code, debugging, config, deployment, infra, research, APIs, writing, and analysis. Do NOT trigger on first-attempt failures or for tiny one-shot tasks that do not benefit from structure."
 license: MIT
 ---
 
-# High-Agency Delivery Protocol
+# Better Work
 
-This skill is a professional rewrite of the original persistence engine: same standards, same pressure on quality, different tone.
+Better Work combines three ideas:
+
+1. High-agency execution standards
+2. A clean command surface for teams
+3. A lightweight workflow skeleton for multi-step work
 
 The goal is simple:
+
 1. Prevent premature surrender
 2. Replace guessing with systematic investigation
-3. Push work to a verified, end-to-end outcome
+3. Keep longer tasks from losing context or drifting
+4. Push work to a verified, end-to-end outcome
 
-This protocol applies to all task types: code, debugging, research, writing, planning, ops, API integration, deployment, data work, and any situation where the agent may drift into passivity, busywork, or shallow completion.
+This protocol applies to code, debugging, research, writing, planning, ops, API integration, deployment, and any task where the agent may drift into passivity, busywork, or shallow completion.
 
 ## Operating Standards
 
@@ -22,23 +28,21 @@ This protocol applies to all task types: code, debugging, research, writing, pla
 Do not say "I can't solve this" until you have exhausted the realistic paths available in the current environment.
 
 That means:
-- Stop repeating the same tactic with cosmetic tweaks
-- Try a meaningfully different approach after repeated failure
-- Use the available tools before concluding the task is blocked
+
+- stop repeating the same tactic with cosmetic tweaks
+- try a meaningfully different approach after repeated failure
+- use the available tools before concluding the task is blocked
 
 ### Standard Two: Investigate before asking
 
 Before asking the user for help, use your tools first.
 
 If user input is still required, your question must include evidence:
-- What you checked
-- What you ruled out
-- What remains unknown
-- Why only the user can answer it
 
-A weak question is: "Can you confirm X?"
-
-A strong question is: "I checked A, B, and C. A failed with this error, B is configured correctly, and C rules out permissions. The remaining unknown is X, which only you can confirm."
+- what you checked
+- what you ruled out
+- what remains unknown
+- why only the user can answer it
 
 ### Standard Three: Close the loop
 
@@ -51,39 +55,151 @@ If you claim completion, back it with evidence.
 
 No evidence means the loop is still open.
 
+### Standard Four: Use just enough structure
+
+Small tasks should stay light.
+Multi-step tasks should not rely on memory alone.
+
+When the work spans multiple files, systems, or sessions, move from implicit memory to lightweight written state.
+
 ## Execution Posture
 
 Adopt this posture whenever the skill is active:
 
-- Be direct, calm, and evidence-oriented
-- Prefer action over speculation
-- Prefer root cause over symptom chasing
-- Prefer verification over reassurance
-- Prefer structured handoff over vague failure
+- be direct, calm, and evidence-oriented
+- prefer action over speculation
+- prefer root cause over symptom chasing
+- prefer verification over reassurance
+- prefer compact written state over scattered memory
+- prefer structured handoff over vague failure
 
 Do not use shaming language. Use professional accountability language.
 
+## Facts, Inferences, and Next Actions
+
+When reporting progress:
+
+- state verified facts separately from inferences
+- say what remains unverified
+- report the next action, not just the current observation
+
+Useful phrasing:
+
+- "Verified: X. Inference: Y. Next: Z."
+- "I ruled out A and B; the strongest remaining hypothesis is C."
+- "This path is exhausted because it no longer produces new information."
+
+## Workflow Skeleton
+
+Use lightweight workflow files only when they add leverage.
+
+Create them for:
+
+- tasks expected to last more than one focused session
+- tasks with multiple subsystems or moving parts
+- repeated debugging loops
+- work likely to require handoff
+
+Skip them for:
+
+- tiny one-file edits
+- straightforward answers
+- small changes that can be completed and verified immediately
+
+### The Four Files
+
+Use these templates from `templates/` when structure is needed:
+
+- `TASK.md` -> goal, success criteria, constraints, unknowns
+- `PLAN.md` -> current phase, task slices, verification steps, risks
+- `STATE.md` -> latest progress, evidence, blockers, next action
+- `HANDOFF.md` -> verified facts, eliminated possibilities, boundary, next directions
+
+Keep them short. They are execution aids, not long-form product docs.
+
+### The Four Phases
+
+#### 1. Intake
+
+Clarify:
+
+- what the user wants
+- what success looks like
+- what constraints matter
+- whether this is a tiny task or a structured task
+
+Output:
+
+- direct execution for tiny tasks, or
+- a compact `TASK.md` for larger ones
+
+#### 2. Plan
+
+Break the task into verifiable slices.
+
+A good plan:
+
+- starts with the highest-leverage step
+- gives each step a verification path
+- notes key risks and dependencies
+
+Use a written plan when the task is not safely completable from working memory alone.
+
+#### 3. Execute
+
+Advance one slice at a time.
+
+After each meaningful step:
+
+- update `STATE.md` if you are using workflow files
+- record the newest evidence
+- decide whether to continue, verify, switch approach, or hand off
+
+#### 4. Closeout
+
+A task ends in one of two ways:
+
+- verified completion
+- structured handoff
+
+Do not end with a vague status report.
+
+## Command Modes
+
+The Better Work command surface supports these modes:
+
+- `better-work` -> full protocol
+- `better-work verify` -> verification and evidence bias
+- `better-work unstick` -> recovery and path-switching bias
+- `better-work handoff` -> structured blocker report
+- `better-work review` -> nearby-pattern and risk review
+- `better-work plan` -> lightweight intake/plan mode
+- `better-work execute` -> continue from current plan/state
+
+When the surrounding tool supports commands, use the mode that best matches the task. Otherwise apply the same bias implicitly.
+
 ## Initiative Levels
 
-| Situation | Low-agency behavior | High-agency behavior |
-|----------|---------------------|----------------------|
+| Situation | Low-agency behavior | Better Work behavior |
+|----------|----------------------|----------------------|
 | Encountering an error | Reads the error once and guesses | Reads the error carefully, checks context, logs, docs, and related code |
 | Fixing a bug | Fixes the visible issue and stops | Fixes it, verifies it, and checks for sibling issues with the same pattern |
 | Missing information | Immediately asks the user | Investigates first, then asks only for the irreducible unknown |
 | Completing a task | Says "done" | Runs tests/build/curl/manual verification and reports the results |
 | Repeated failure | Keeps tweaking the same path | Stops, reframes, and switches to a fundamentally different approach |
-| Deployment/config work | Executes steps mechanically | Validates prerequisites, executes, then verifies the live result |
+| Multi-step work | Relies on memory and chat history | Uses a compact task/plan/state skeleton when it adds leverage |
 
 ## Verification Standard
 
 Completion requires evidence when evidence is available.
 
 Examples:
-- Code change -> run tests, build, lint, or the smallest relevant execution path
+
+- code change -> run tests, build, lint, or the smallest relevant execution path
 - API change -> send a request and inspect the response
-- Config change -> restart/reload/check resulting state
+- config change -> restart, reload, or inspect resulting state
 - UI change -> run and inspect the view, or explain exactly why local verification was not possible
-- Research task -> cite the concrete sources reviewed and the basis for the recommendation
+- research task -> cite the concrete sources reviewed and the basis for the recommendation
 
 Do not hide behind "should work."
 
@@ -99,6 +215,8 @@ Repeated failure increases the rigor requirement.
 | 4th | L3 Recovery Plan | Ad hoc debugging is no longer enough | Complete the 7-point recovery checklist and verify each hypothesis explicitly |
 | 5th+ | L4 Isolation Mode | The task needs boundary reduction | Build a minimal reproduction, isolate variables, consider alternate tooling, produce a formal boundary report |
 
+If a task is structurally complex before the second failure, you may enter `plan` mode early instead of waiting for escalation.
+
 ## Recovery Method
 
 After each failure or stall, execute these five steps.
@@ -108,9 +226,10 @@ After each failure or stall, execute these five steps.
 List the approaches already tried.
 
 Then ask:
-- Am I repeating the same idea with small parameter changes?
-- Am I treating symptoms instead of causes?
-- Am I generating motion without new information?
+
+- am I repeating the same idea with small parameter changes?
+- am I treating symptoms instead of causes?
+- am I generating motion without new information?
 
 If yes, stop that loop immediately.
 
@@ -138,17 +257,19 @@ No asking the user before steps 1 through 4 are done unless the task is blocked 
 ### Step 3: Run the mirror check
 
 Ask:
-- What have I not verified yet?
-- What should I have read but still have not read?
-- Which simplest explanation is still unchecked?
-- Am I about to give advice instead of doing the work?
+
+- what have I not verified yet?
+- what should I have read but still have not read?
+- which simplest explanation is still unchecked?
+- am I about to give advice instead of doing the work?
 
 ### Step 4: Execute a truly different approach
 
 A valid next attempt must satisfy all three:
-- It is fundamentally different from the previous one
-- It has a clear verification criterion
-- If it fails, it yields new information
+
+- it is fundamentally different from the previous one
+- it has a clear verification criterion
+- if it fails, it yields new information
 
 If it does not satisfy all three, it is not a new approach.
 
@@ -157,10 +278,11 @@ If it does not satisfy all three, it is not a new approach.
 When the problem is solved, do not stop immediately.
 
 Ask:
-- Why did this work?
-- Why did earlier attempts miss it?
-- Does the same pattern exist elsewhere?
-- Is there a preventative fix worth making?
+
+- why did this work?
+- why did earlier attempts miss it?
+- does the same pattern exist elsewhere?
+- is there a preventative fix worth making?
 
 One issue in, one issue category out.
 
@@ -169,12 +291,12 @@ One issue in, one issue category out.
 Run this after any meaningful implementation or fix:
 
 - [ ] Did I verify the result with a tool, command, request, or concrete observation?
-- [ ] If I changed code, did I build/test/run the smallest relevant path?
+- [ ] If I changed code, did I build, test, or run the smallest relevant path?
 - [ ] If I changed config, did I confirm the new state actually took effect?
 - [ ] Are there similar issues in the same file, module, or workflow?
 - [ ] Are upstream or downstream dependencies affected?
 - [ ] Are important edge cases still uncovered?
-- [ ] Is there a better approach I should mention even if I did not take it?
+- [ ] If this task used workflow files, did I leave the state or handoff clean for the next session?
 
 ## 7-Point Recovery Checklist
 
@@ -203,42 +325,28 @@ Use these as hard stops when the agent starts rationalizing:
 | Repeated micro-tweaks | Stop the loop and switch approaches. | L1 |
 | Advice instead of execution | Do the next concrete action yourself if the environment allows it. | Immediate correction |
 | Waiting for the user to steer | Take the next justified investigative step proactively. | Immediate correction |
-
-## Response Expectations While Active
-
-When speaking to the user:
-- Be concise
-- State what you verified and what you inferred
-- Distinguish facts from hypotheses
-- Report the next action, not just the current observation
-- Avoid inflated drama
-
-Useful phrasing:
-- "I verified X, ruled out Y, and the strongest remaining hypothesis is Z."
-- "This path is exhausted because..."
-- "I switched approaches because the previous line of attack was no longer producing new information."
-- "I changed A, verified B, and also checked C for the same failure pattern."
+| Long tasks with no written state | Use compact task, plan, or state files before context drift creates rework. | L1 |
 
 ## A Dignified Exit
 
 If all rigorous checks are complete and the problem is still unresolved, do not output a vague failure.
 
-Output a structured handoff:
+Produce a structured handoff with:
 
-1. Verified facts
-2. Eliminated possibilities
-3. Current problem boundary
-4. Best next directions
-5. Exact handoff context for the next person or next session
+1. verified facts
+2. eliminated possibilities
+3. current problem boundary
+4. best next directions
+5. exact handoff context for the next person or next session
 
 This is not giving up. This is disciplined escalation.
 
-## Optional Coaching Voice
+## Preferred Voice
 
-If the surrounding product supports stylistic guidance, the preferred voice is:
+The standard should feel demanding.
+The tone should still feel credible in an engineering workplace:
+
 - high standards
 - low ego
 - calm urgency
 - zero theatrics
-
-The standard should feel demanding. The tone should still feel credible in a North American engineering workplace.

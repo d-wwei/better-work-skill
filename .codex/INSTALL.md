@@ -64,6 +64,40 @@ Test-Path "$env:USERPROFILE\.codex\skills\better-work\SKILL.md"
 | Direct call | Type `$better-work` in conversation | SKILL.md |
 | Manual prompt | Type `/prompts:better-work` in conversation | SKILL.md + prompts/better-work.md |
 
+## Modes
+
+Use the same prompt entry with an optional mode:
+
+- `$better-work`
+- `$better-work verify`
+- `$better-work unstick`
+- `$better-work handoff`
+- `$better-work review`
+- `$better-work plan`
+- `$better-work execute`
+
+`plan` and `execute` are useful for tasks that span multiple files, systems, or sessions.
+
+If your tool supports separate prompt aliases, you can also map:
+
+- `commands/better-work-verify.md`
+- `commands/better-work-unstick.md`
+- `commands/better-work-handoff.md`
+- `commands/better-work-review.md`
+- `commands/better-work-plan.md`
+- `commands/better-work-execute.md`
+
+## Lightweight Workflow Files
+
+For larger tasks, Better Work can use a compact workflow skeleton instead of relying on chat memory alone:
+
+- `TASK.md`
+- `PLAN.md`
+- `STATE.md`
+- `HANDOFF.md`
+
+Templates for these files live in `templates/` in the repo. Use them only when they add leverage; tiny one-shot tasks should stay lightweight.
+
 ## Update
 
 ```bash

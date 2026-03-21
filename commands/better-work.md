@@ -1,17 +1,19 @@
 ---
-description: "Better Work command surface. Use /better-work for the core protocol, or add verify, unstick, handoff, or review."
-argument-hint: "[verify|unstick|handoff|review] [task description]"
+description: "Better Work command surface. Use /better-work for the core protocol, or add verify, unstick, handoff, review, plan, or execute."
+argument-hint: "[verify|unstick|handoff|review|plan|execute] [task description]"
 ---
 
 Load the `better-work` core skill and apply it to the current task.
 
 ## Command Routing
 
-- No subcommand -> activate the full Better Work protocol
+- no subcommand -> activate the full Better Work protocol
 - `verify` -> focus on verification, evidence, and close-the-loop checks
 - `unstick` -> focus on recovery method, alternate hypotheses, and changing direction
 - `handoff` -> produce a structured boundary report with verified facts and next steps
 - `review` -> inspect sibling issues, edge cases, and upstream/downstream impact after a fix
+- `plan` -> clarify the task, define success criteria, and write a lightweight execution plan if needed
+- `execute` -> continue from the current task, plan, or state and keep written progress current when those files exist
 
 ## Execution Rules
 
@@ -19,10 +21,25 @@ Load the `better-work` core skill and apply it to the current task.
 2. Follow the behavior protocol in `SKILL.md`
 3. If `$ARGUMENTS` contains text beyond the subcommand, treat it as the task description
 4. Use the subcommand to bias the output:
-   - `verify`: prioritize evidence, tests, build output, runtime checks
+   - `verify`: prioritize evidence, tests, build output, runtime checks, and completion criteria
    - `unstick`: prioritize diagnosis, search, assumption checks, and a new approach
    - `handoff`: prioritize verified facts, eliminated possibilities, and problem boundaries
-   - `review`: prioritize related-pattern checks and follow-on risks
+   - `review`: prioritize related-pattern checks, edge cases, and follow-on risks
+   - `plan`: prioritize intake, task decomposition, verification steps, and whether workflow files are warranted
+   - `execute`: prioritize the next highest-leverage slice, evidence capture, and `STATE.md` hygiene when a structured workflow is in use
+
+## Lightweight Workflow Rule
+
+Do not create project files for tiny one-shot tasks.
+
+If the task is multi-step, likely to span sessions, or already showing context drift, use these lightweight files:
+
+- `TASK.md`
+- `PLAN.md`
+- `STATE.md`
+- `HANDOFF.md`
+
+Keep them short and execution-focused.
 
 ## Example Invocations
 
@@ -55,3 +72,15 @@ Load the `better-work` core skill and apply it to the current task.
 - `/better-work review Check this module for sibling issues after the fix.`
 - `/better-work review Look for upstream/downstream impact before we call this done.`
 - `/better-work review Inspect edge cases and similar patterns in nearby files.`
+
+### `/better-work plan`
+
+- `/better-work plan Break this migration into safe, verifiable steps.`
+- `/better-work plan Set up a lightweight task plan for this feature.`
+- `/better-work plan Decide whether this task needs written state.`
+
+### `/better-work execute`
+
+- `/better-work execute Continue from the current plan and update the state.`
+- `/better-work execute Finish the next slice and leave evidence.`
+- `/better-work execute Resume this task without losing context.`

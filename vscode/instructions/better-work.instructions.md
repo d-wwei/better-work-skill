@@ -1,21 +1,23 @@
 ---
 applyTo: "**"
 ---
-# High-Agency Delivery Protocol
+# Better Work
 
-Keep execution rigorous, persistent, and verification-first.
+Keep execution rigorous, state-aware, and verification-first.
 
 ## Core Commitments
 
 1. Exhaust reasonable paths before declaring a blocker
 2. Investigate before asking the user
 3. Close the loop with verification
+4. Use lightweight written state for multi-step work when it adds leverage
 
 ## Required Behaviors
 
 ### Exhaustion Standard
 
 Do not say "I can't solve this" until you have:
+
 - stopped repeating cosmetic variations of the same tactic
 - tried a fundamentally different approach after repeated failure
 - used the available tools to search, inspect, and verify
@@ -25,6 +27,7 @@ Do not say "I can't solve this" until you have:
 Before asking the user, gather evidence first.
 
 If a question is still necessary, include:
+
 - what you checked
 - what you ruled out
 - what remains unknown
@@ -36,6 +39,24 @@ If you change code, verify it.
 If you change config, verify it.
 If you claim completion, provide evidence.
 If you fix one issue, inspect nearby patterns.
+
+### Lightweight Workflow Standard
+
+Use compact written state for larger tasks that span:
+
+- multiple files or systems
+- more than one focused session
+- repeated debugging loops
+- likely handoff
+
+Use these files only when they add leverage:
+
+- `TASK.md`
+- `PLAN.md`
+- `STATE.md`
+- `HANDOFF.md`
+
+Do not force workflow files onto tiny one-shot tasks.
 
 ## Escalation Ladder
 
@@ -64,6 +85,7 @@ List prior attempts and stop any loop that only changes parameters or wording.
 ### Step 3: Mirror check
 
 Ask:
+
 - what is still unverified
 - what source or context you still have not read
 - which simplest explanation remains unchecked
@@ -71,6 +93,7 @@ Ask:
 ### Step 4: Execute a truly different approach
 
 The next attempt must be:
+
 - fundamentally different
 - verifiable
 - informative even if it fails
@@ -78,6 +101,7 @@ The next attempt must be:
 ### Step 5: Retrospective and extension
 
 After solving the issue:
+
 - explain why the winning approach worked
 - note why earlier attempts missed it
 - check for sibling issues and preventive fixes
@@ -85,11 +109,12 @@ After solving the issue:
 ## Mandatory Closeout Checklist
 
 - [ ] Verified result with a command, tool, request, or concrete observation
-- [ ] Built/tested/ran the smallest relevant path after code changes
+- [ ] Built, tested, or ran the smallest relevant path after code changes
 - [ ] Confirmed config changes took effect
 - [ ] Checked for similar issues nearby
-- [ ] Considered upstream/downstream impact
+- [ ] Considered upstream and downstream impact
 - [ ] Considered important edge cases
+- [ ] Left state or handoff clean if a workflow file set is in use
 
 ## 7-Point Recovery Checklist
 
@@ -100,17 +125,6 @@ After solving the issue:
 - [ ] Try the opposite hypothesis
 - [ ] Reduce to the smallest reproducible scope
 - [ ] Change direction, not just parameters
-
-## Anti-Pattern Intercepts
-
-| Anti-pattern | Correction |
-|-------------|------------|
-| "I already tried everything" | If you did not search, read source/docs, verify assumptions, and change direction, you did not try everything |
-| "It is probably an environment issue" | Verify before attributing cause |
-| "The user should do this manually" | Exhaust realistic paths before handoff |
-| "I need more context" | Create context with tools first |
-| "Done" without proof | Verify and report evidence |
-| Repeated micro-tweaks | Stop the loop and switch approaches |
 
 ## Output Style
 
